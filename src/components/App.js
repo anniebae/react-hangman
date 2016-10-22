@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import IncorrectBox from './IncorrectBox'
+import logo from '../logo.svg';
+import '../App.css';
 import randomWords from 'random-words';
-
-const css = {
-  letter: {
-    display: 'inline-block',
-    marginRight: '10px'
-  },
-  guess: {
-    fontFamily: 'HelveticaNeue-Light',
-    fontSize: '28px',
-    textAlign: 'center',
-    margin: '0 auto',
-    color: 'hotpink'
-  }
-}
 
 class App extends Component {
 
@@ -26,7 +13,8 @@ class App extends Component {
       letters: [],
       gameplay: [],
       inputValue: '',
-      guess: ''
+      guess: '',
+      incorrectLetters: []
     }
 
     this.inputLetter = this.inputLetter.bind(this)
@@ -64,6 +52,10 @@ class App extends Component {
     if (word.includes(value)) {
       const indices = this.findIt(value);
       this.setState({ gameplay: this.replaceIt(value, indices) })
+    } else {
+      this.setState({
+        incorrectLetters: this.state.incorrectLetters.concat([value])
+      })
     }
   }
 
@@ -90,10 +82,10 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <div style={css.guess}>{this.state.guess}</div>
+          <div className="guess">{this.state.guess}</div>
           <h2>
             {this.state.gameplay.map((x, i) =>
-              <div key={i} style={css.letter}>{x}</div>
+              <div key={i} className="letter">{x}</div>
             )}
           </h2>
         </div>
@@ -105,6 +97,8 @@ class App extends Component {
             value={this.state.inputValue}
             onChange={this.inputLetter} />
         </p>
+
+        <IncorrectBox letters={this.state.incorrectLetters} />
       </div>
     );
   }
