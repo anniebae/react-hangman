@@ -35,3 +35,9 @@
   margin: 0 auto;
   color: hotpink;
 }
+
+.incorrect-letter {
+  display: inline-block;
+  margin-right: 5px;
+  color: red;
+}
