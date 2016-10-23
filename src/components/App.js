@@ -123,7 +123,9 @@ class App extends Component {
         </p>
         
         {this.state.hasWon 
-          ? <button onClick={this.getWord}>Congrats! Play Agin Bitch!</button> 
+          ? <button 
+            className="restart-btn"
+            onClick={this.getWord}>Congrats! Play Agin Bitch!</button>
           : <IncorrectBox letters={this.state.incorrectLetters} />
         }
 

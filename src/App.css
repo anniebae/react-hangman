@@ -54,6 +54,17 @@
   color: hotpink;
 }
 
+.restart-btn {
+  height: 50px;
+  transition-delay: 8.0s;
+  transition: 2.0s;
+  background-color: hotpink;
+  color: yellow;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 1px 1px 2px ;
+}
+
 .incorrect-letter {
   display: inline-block;
   margin-right: 5px;
