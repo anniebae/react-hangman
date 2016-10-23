@@ -51,7 +51,7 @@ class App extends Component {
         .map(x => '_'),
       incorrectLetters: [],
       hasWon: false,
-      guess: ''
+      guess: 'Start Guession'
     })  
     
     this.input.focus()
@@ -91,7 +91,7 @@ class App extends Component {
 
   replaceIt(letter, indices) {
     return this.state.gameplay
-      .map((x, i) => console.log(indices.toString().includes(i), x, i) || indices.toString().includes(i) ? letter : x)
+      .map((x, i) => indices.toString().includes(i) ? letter : x)
   }
 
   getReference(input) {
@@ -105,7 +105,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <div className="guess">{this.state.guess}</div>
+          <div className="guess">{this.state.guess}<span className="phase">|</span></div>
           <h2>
             {this.state.gameplay.map((x, i) =>
               <div key={i} className="letter">{x}</div>
@@ -115,13 +115,18 @@ class App extends Component {
         
         <p className="App-intro">
           <input 
+            className="input"
             type="text" 
             ref={this.getReference}
             value={this.state.inputValue}
             onChange={this.inputLetter} />
         </p>
-        {this.state.hasWon ? <button onClick={this.getWord}>Congrats! Play Agin Bitch!</button> : null}
-        <IncorrectBox letters={this.state.incorrectLetters} />
+        
+        {this.state.hasWon 
+          ? <button onClick={this.getWord}>Congrats! Play Agin Bitch!</button> 
+          : <IncorrectBox letters={this.state.incorrectLetters} />
+        }
+
       </div>
     );
   }

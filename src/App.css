@@ -23,6 +23,24 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes phase {
+  0%   { opacity: 1 }
+  47%  { opacity: .8 }
+  50%  { opacity: .5 }
+  97%  { opacity: .3 }
+  100% { opacity: 0 }
+}
+
+.phase {
+  animation: phase infinite 1s linear;
+}
+
+.input {
+  height: 0;
+  border: none;
+  outline: none;
+}
+
 .letter {
   display: inline-block;
   margin-right: 10px;
