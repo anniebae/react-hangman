@@ -14,7 +14,7 @@ class App extends Component {
       gameplay: [],
       inputValue: '',
       guess: '',
-      incorrectLetters: []
+      incorrectLetters: [],
     }
 
     this.inputLetter = this.inputLetter.bind(this)
@@ -24,11 +24,22 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.newWord();
+    this.getWord();
   }
 
-  newWord() {
+  getWord() {
     const word = randomWords()
+
+    if (!word || word.length < 6) {
+      this.getWord()
+      console.log(word)
+    } else if (word && word.length >= 6){
+      console.log('❗️❕ AWORD 💩 AHP ❕️❗', word)
+      return this.newWord(word)
+    }
+  }
+
+  newWord(word) {
     this.setState({
       word,
       inputValue: '',
@@ -36,7 +47,8 @@ class App extends Component {
       gameplay: word
         .split('')
         .map(x => '_')
-    })
+    })  
+    
     this.input.focus()
   }
 
