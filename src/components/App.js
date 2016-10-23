@@ -15,11 +15,13 @@ class App extends Component {
       inputValue: '',
       guess: '',
       incorrectLetters: [],
+      hasWon: false
     }
 
-    this.inputLetter = this.inputLetter.bind(this)
-    this.replaceIt = this.replaceIt.bind(this)
-    this.findIt = this.findIt.bind(this)
+    this.getWord      = this.getWord.bind(this)
+    this.inputLetter  = this.inputLetter.bind(this)
+    this.replaceIt    = this.replaceIt.bind(this)
+    this.findIt       = this.findIt.bind(this)
     this.getReference = this.getReference.bind(this)
   }
 
@@ -46,7 +48,10 @@ class App extends Component {
       letters: word.split(''),
       gameplay: word
         .split('')
-        .map(x => '_')
+        .map(x => '_'),
+      incorrectLetters: [],
+      hasWon: false,
+      guess: ''
     })  
     
     this.input.focus()
@@ -63,8 +68,14 @@ class App extends Component {
 
     if (word.includes(value)) {
       const indices = this.findIt(value);
-      this.setState({ gameplay: this.replaceIt(value, indices) })
-    } else {
+      const gameplay = this.replaceIt(value, indices)
+      const remaining = gameplay.filter(x => x === '_')
+
+      this.setState({ 
+        gameplay,
+        hasWon: !remaining.length
+      })
+    } else if (this.state.incorrectLetters.indexOf(value) === -1) {
       this.setState({
         incorrectLetters: this.state.incorrectLetters.concat([value])
       })
@@ -109,7 +120,7 @@ class App extends Component {
             value={this.state.inputValue}
             onChange={this.inputLetter} />
         </p>
-
+        {this.state.hasWon ? <button onClick={this.getWord}>Congrats! Play Agin Bitch!</button> : null}
         <IncorrectBox letters={this.state.incorrectLetters} />
       </div>
     );
