@@ -93,12 +93,13 @@ class App extends Component {
           hasLost: true
         })
       }
-      console.log(this.state.incorrectLetters.length)
     }
   }
 
   numLives() {
-    alert('lost a life')
+    console.log(this.state.incorrectLetters.length)
+    
+
   }
 
   findIt(letter) {
