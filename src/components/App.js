@@ -15,7 +15,8 @@ class App extends Component {
       inputValue: '',
       guess: '',
       incorrectLetters: [],
-      hasWon: false
+      hasWon: false,
+      numLives: ''
     }
 
     this.getWord      = this.getWord.bind(this)
@@ -51,7 +52,8 @@ class App extends Component {
         .map(x => '_'),
       incorrectLetters: [],
       hasWon: false,
-      guess: 'Start Guession'
+      guess: 'Start Guession',
+      numLives: '5'
     })  
     
     this.input.focus()
@@ -79,6 +81,10 @@ class App extends Component {
       this.setState({
         incorrectLetters: this.state.incorrectLetters.concat([value])
       })
+      if (this.state.incorrectLetters.length > 3) {
+        alert('you lawst')
+      }
+      console.log(this.state.incorrectLetters.length)
     }
   }
 
@@ -128,6 +134,7 @@ class App extends Component {
             onClick={this.getWord}>Congrats! Play Agin Bitch!</button>
           : <IncorrectBox letters={this.state.incorrectLetters} />
         }
+        <p>{this.state.numLives}</p>
 
       </div>
     );
