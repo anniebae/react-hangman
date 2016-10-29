@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import IncorrectBox from './IncorrectBox'
+import IncorrectBox from './IncorrectBox';
+import NumLives from './NumLives';
 import logo from '../logo.svg';
 import '../App.css';
 import randomWords from 'random-words';
@@ -25,6 +26,7 @@ class App extends Component {
     this.replaceIt    = this.replaceIt.bind(this)
     this.findIt       = this.findIt.bind(this)
     this.getReference = this.getReference.bind(this)
+    this.numLives     = this.numLives.bind(this)
   }
 
   componentDidMount() {
@@ -68,7 +70,7 @@ class App extends Component {
     this.setState({ 
       inputValue: '', 
       guess: value,
-      numLives: []
+      numLives: 5
     })
 
     if (word.includes(value)) {
@@ -84,6 +86,7 @@ class App extends Component {
       this.setState({
         incorrectLetters: this.state.incorrectLetters.concat([value])
       })
+      this.numLives();
       if (this.state.incorrectLetters.length >= 4) {
         alert('you lawst')
         this.setState({
@@ -92,6 +95,10 @@ class App extends Component {
       }
       console.log(this.state.incorrectLetters.length)
     }
+  }
+
+  numLives() {
+    alert('lost a life')
   }
 
   findIt(letter) {
@@ -145,7 +152,7 @@ class App extends Component {
           ? <button
             className="lost-btn"
             onClick={this.getWord}>You lost :( start over?</button>
-          : null
+          : <NumLives />
         }
         <p>{this.state.numLives}</p>
 
