@@ -16,7 +16,8 @@ class App extends Component {
       guess: '',
       incorrectLetters: [],
       hasWon: false,
-      numLives: ''
+      hasLost: false,
+      numLives: []
     }
 
     this.getWord      = this.getWord.bind(this)
@@ -52,8 +53,9 @@ class App extends Component {
         .map(x => '_'),
       incorrectLetters: [],
       hasWon: false,
+      hasLost: false,
       guess: 'Start Guession',
-      numLives: '5'
+      numLives: []
     })  
     
     this.input.focus()
@@ -65,7 +67,8 @@ class App extends Component {
 
     this.setState({ 
       inputValue: '', 
-      guess: value
+      guess: value,
+      numLives: []
     })
 
     if (word.includes(value)) {
@@ -81,8 +84,11 @@ class App extends Component {
       this.setState({
         incorrectLetters: this.state.incorrectLetters.concat([value])
       })
-      if (this.state.incorrectLetters.length > 3) {
+      if (this.state.incorrectLetters.length >= 4) {
         alert('you lawst')
+        this.setState({
+          hasLost: true
+        })
       }
       console.log(this.state.incorrectLetters.length)
     }
@@ -133,6 +139,13 @@ class App extends Component {
             className="restart-btn"
             onClick={this.getWord}>Congrats! Play Agin Bitch!</button>
           : <IncorrectBox letters={this.state.incorrectLetters} />
+        }
+
+        {this.state.hasLost
+          ? <button
+            className="lost-btn"
+            onClick={this.getWord}>You lost :( start over?</button>
+          : null
         }
         <p>{this.state.numLives}</p>
 

@@ -55,14 +55,23 @@
 }
 
 .restart-btn {
-  height: 50px;
-  transition-delay: 8.0s;
-  transition: 2.0s;
-  background-color: hotpink;
-  color: yellow;
-  border: none;
-  border-radius: 2px;
-  box-shadow: 1px 1px 2px ;
+  padding: 2%;
+  background-color: transparent;
+  color: hotpink;
+  border: 2px solid hotpink;
+  cursor: pointer;
+  font-family: 'HelveticaNeue-Light';
+  font-size: 12px;
+}
+
+.lost-btn {
+  padding: 2%;
+  border: 2px solid blue;
+  background: transparent;
+  color: blue;
+  cursor: pointer;
+  font-family: 'HelveticaNeue-Light';
+  font-size: 12px;
 }
 
 .incorrect-letter {
